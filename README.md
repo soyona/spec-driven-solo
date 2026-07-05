@@ -138,3 +138,11 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 本项目基于 [MIT License](https://github.com/soyona/spec-driven-solo/blob/main/LICENSE) 开源。欢迎所有超级个体自由地修改、分发并用于商业项目。
 
 如果你觉得这套规范切实优化了您的开发流程并降低了研发成本，请为本项目点一个 ⭐ Star，这也是对独立开发者最好的支持！
+
+
+## 📅 变更日志 (Change Log)
+
+### [V1.1.0] - 2026-07-05
+* **🚀 新增特性**：项目初始化时默认自动构建 `.gitignore` 配置文件。
+  * **工程根因**：Mac 系统在频繁操作目录时会自动生成隐藏的 `.DS_Store` 文件，该文件的无序变动会干扰本地自主智能体（如 Codex / Cline）的文件树索引（Indexing）。
+  * **优化目的**：通过物理忽略机制，严格限制智能体的内容扫描与索引范围，将算力与 Token 消耗 100% 锁死在规范定义的三轨目录内，阻止非必要的上下文污染。

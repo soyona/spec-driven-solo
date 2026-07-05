@@ -135,6 +135,14 @@ EOF
 # 6. 创建源码轨的占位文件
 touch src/types/index.ts src/main.ts package.json tsconfig.json
 
+# ⚖️ 【新增特性 V1.1.0】写入标准 .gitignore 锁死 Agent 索引范围
+cat << 'EOF' > .gitignore
+node_modules/
+dist/
+.DS_Store
+*.log
+EOF
+
 echo "--------------------------------------------------------"
 echo "✅ [Mac] Spec-Driven V1.0 目录结构一键初始化成功！"
 echo "📂 项目路径: $(pwd)"
