@@ -3,10 +3,10 @@
 # ==============================================================================
 # 🚀 Spec-Driven Solo 开发工程规范 (V1.0) - Mac 一键初始化脚本
 # 使用方法: 
-#   1. sh init_spec_project.sh             (将以当前日期命名创建项目)
-#   2. sh init_spec_project.sh my-cool-app (自定义项目名称)
+#   1. bash init_spec.sh             (将以当前日期命名创建项目)
+#   2. bash init_spec.sh my-cool-app (自定义项目名称)
 # 
-# 赋予权限命令: chmod +x init_spec_project.sh
+# 赋予权限命令: chmod +x init_spec.sh
 # ==============================================================================
 
 # 1. 动态获取项目名称
@@ -29,7 +29,7 @@ mkdir -p src/types src/components src/lib
 # 4. 写入常驻硬约束（AI 行为紧箍咒与熔断机制）
 cat << 'EOF' > .clinerules
 # 最高系统指令 (System Rules)
-1. 每次对话开始前，必须完整通读 `memory-bank/` 下的所有文件，重建世界观。
+1. 每次会话开始前，必须完整通读 memory-bank/ 下的所有文件，重建对代码库的全局认知。
 2. 严禁改动任何未在 `memory-bank/activeContext.md` 中提及的源码文件。
 3. 【强类型契约】：编写任何业务逻辑前，必须严格对齐 `memory-bank/dataModels.md`。
 4. 【报错熔断】：一旦你在终端运行编译、构建或 Lint 命令连续失败超过 3 次，你必须立刻停止（Stop）一切 Act 行为，向人类如实报告，严禁盲目猜测修改。
@@ -110,5 +110,5 @@ touch src/types/index.ts src/main.ts package.json tsconfig.json
 echo "--------------------------------------------------------"
 echo "✅ [Mac] Spec-Driven V1.0 目录结构一键初始化成功！"
 echo "📂 项目路径: $(pwd)"
-echo "💡 提示: 请直接使用 VS Code 打开该目录，并将文件夹授权给 Codex/Cline 开始挂机搬砖。"
+echo "💡 提示: 请直接使用 VS Code / IDE 打开该目录，并将工作区访问权限授予您的 Codex / Cline 智能体开始协同开发。"
 echo "--------------------------------------------------------"
