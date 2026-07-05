@@ -91,12 +91,12 @@ graph TD
 你不需要手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成标准的 Spec-Driven 骨架：
 
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh](https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh) | bash
+curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash
 ```
 
 ### 自定义项目名称：
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh](https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh) | bash -s my-cool-app
+curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash -s my-cool-app
 ```
 执行成功后，直接使用 VS Code 打开该目录，并将文件夹授权给 Codex/Cline，即可开启无情搬砖模式！
 
