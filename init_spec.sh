@@ -26,8 +26,8 @@ if [ -d "$PROJECT_NAME" ]; then
     echo " [3] 终止退出"
     echo "--------------------------------------------------------"
     
-    # 读取用户终端输入
-    read -p "请输入选项数字 (1/2/3): " CONFLICT_CHOICE
+    # 💡 强制重定向标准输入至物理控制终端，确保 curl | bash 场景下键盘输入有效
+    read -p "请输入选项数字 (1/2/3): " CONFLICT_CHOICE </dev/tty
     
     case $CONFLICT_CHOICE in
         1)
