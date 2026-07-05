@@ -16,7 +16,35 @@ if [ -z "$PROJECT_NAME" ]; then
     PROJECT_NAME="spec-app-$CURRENT_DATE"
 fi
 
-echo "📂 正在初始化 Spec-Driven V1.0 项目: ${PROJECT_NAME}..."
+# 🚨 核心冲突检查机制：判定本地是否存在同名目录
+if [ -d "$PROJECT_NAME" ]; then
+    echo "⚠️  警告: 本地已存在同名目录 [${PROJECT_NAME}]"
+    echo "--------------------------------------------------------"
+    echo " 请选择后续操作:"
+    echo " [1] 覆盖初始化 (清空原目录并重新构建 - ⚠️ 危险操作)"
+    echo " [2] 增量继续 (保留原目录，仅补全缺失的三轨制结构与规则文件)"
+    echo " [3] 终止退出"
+    echo "--------------------------------------------------------"
+    
+    # 读取用户终端输入
+    read -p "请输入选项数字 (1/2/3): " CONFLICT_CHOICE
+    
+    case $CONFLICT_CHOICE in
+        1)
+            echo "🔥 正在清空并重新初始化目录: ${PROJECT_NAME}..."
+            rm -rf "$PROJECT_NAME"
+            ;;
+        2)
+            echo "🔄 正在对已有目录进行增量合规化补全: ${PROJECT_NAME}..."
+            ;;
+        *)
+            echo "🛑 操作已取消，脚本安全退出。"
+            exit 0
+            ;;
+    esac
+else
+    echo "📂 正在初始化 Spec-Driven V1.0 项目: ${PROJECT_NAME}..."
+fi
 
 # 2. 创建项目根目录并进入
 mkdir -p "$PROJECT_NAME" && cd "$PROJECT_NAME"
@@ -32,7 +60,7 @@ cat << 'EOF' > .clinerules
 1. 每次会话开始前，必须完整通读 memory-bank/ 下的所有文件，重建对代码库的全局认知。
 2. 严禁改动任何未在 `memory-bank/activeContext.md` 中提及的源码文件。
 3. 【强类型契约】：编写任何业务逻辑前，必须严格对齐 `memory-bank/dataModels.md`。
-4. 【报错熔断】：一旦你在终端运行编译、构建或 Lint 命令连续失败超过 3 次，你必须立刻停止（Stop）一切 Act 行为，向人类如实报告，严禁盲目猜测修改。
+4. 【报错熔断】：一旦你在终端运行编译、构建或 Lint 命令连续失败超过 3 次，你必须立刻停止（Stop）一切 Act 行为，向人类如实报告日志，严禁盲目猜测与高频试错。
 EOF
 cp .clinerules .codexrules
 
@@ -40,7 +68,7 @@ cp .clinerules .codexrules
 cat << 'EOF' > memory-bank/projectBrief.md
 # 项目总纲 (projectBrief.md)
 ## 1. 核心愿景与产品定义
-[在这里写下你产品的一句话定义]
+[在此写入产品的一句话显式定义]
 
 ## 2. 核心范围 (In Scope)
 - [ ] 核心功能 1
