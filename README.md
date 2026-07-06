@@ -1,4 +1,4 @@
-# 📘 Spec-Driven Solo 开发工程规范 (V1.0)
+# 📘 Spec-Driven Solo 开发工程规范 (V1.2.0)
 
 > **专为 ChatGPT Plus (Web) + Codex / Cline / Roo-Cline 架构设计的全栈三轨工程标准。旨在通过引入确定性的工程约束机制，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、状态丢失以及无限执行死循环等核心痛点。**
 
@@ -87,7 +87,8 @@
 > 1. **状态同步**：每次对话开始前，必须完整通读 `memory-bank/` 下的所有文件，重建对代码库的全局认知。
 > 2. **契约对齐**：严禁改动任何未在 `activeContext.md` 中提及的源码文件；编写业务逻辑前，必须严格对齐 `dataModels.md` 的强类型。
 > 3. **💥 异常熔断协议**：一旦在终端运行编译、构建或 Lint 命令**连续失败超过 3 次**，AI 必须立刻停止（Stop）一切 Act 行为，如实记录当前错误日志，并挂起会话以等待人类开发者干预。**严禁盲目猜测修改**。
-> 
+> 4. **⚙️ 记忆回写即交付 (No Log, No Done)**：你在声称任何任务“修复完成”或“请求验收”前，【必须且只能】将物理更新 `memory-bank/activeContext.md` 与 `memory-bank/progress.md` 作为你 Act 行为的最后一步。若仅修改源码而未同步外部化状态（EST），则判定为【非法交付】，系统将拒绝承认并原地锁定。
+> 5. **🌐 运行环境双轨验证**：除通过 Lint 和 Build 静态三层卡点外，若涉及局域网（192.168.x.x）或物理真机调试，必须在前置配置轨中显式允许安全源（如 Next.js 的 allowedDevOrigins），严禁产生隐式运行时跨域死锁。
 > 
 
 ---
@@ -110,7 +111,7 @@ graph TD
 
 ## 🚀 四、 3秒极速上手 (Quick Start)
 
-你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成标准的 Spec-Driven 骨架：
+你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 Spec-Driven V1.2.0 骨架：
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash
@@ -141,6 +142,11 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 
 
 ## 📅 变更日志 (Change Log)
+
+### [V1.2.0] - 2026-07-06
+* **🚀 新增特性**：引入“双向握手”与“运行环境双轨验证”机制。
+  * **工程根因**：在 **[9x9 MathGrid](https://github.com/soyona/9x9)** 项目的局域网真机多端联调实战中，发现智能体在长会话源码落地时存在“重编码、轻记忆”的状态漂移痛点；同时存在“静态编译通过，但局域网 HMR/跨域安全策略导致运行时点击无响应”的边界二义性死锁。
+  * **优化目的**：将“Memory Bank 持久化回写”提升为宣告任务结束的唯一合法前置物理卡点；并在 `techContext.md` 中强制开辟 `[Runtime & Network Boundaries]` 运行时网络防线，彻底锁死 AI 在静态编译与动态运行环境下的状态一致性。
 
 ### [V1.1.0] - 2026-07-05
 * **🚀 新增特性**：项目初始化时默认自动构建 `.gitignore` 配置文件。
