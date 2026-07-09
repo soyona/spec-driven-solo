@@ -1,4 +1,4 @@
-# 📘 Spec-Driven Solo 开发工程规范 (V1.2.0)
+# 📘 Spec-Driven Solo 开发工程规范 (V1.3.0)
 
 > **专为 ChatGPT Plus (Web) + Codex / Cline / Roo-Cline 架构设计的全栈三轨工程标准。旨在通过引入确定性的工程约束机制，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、状态丢失以及无限执行死循环等核心痛点。**
 
@@ -111,7 +111,7 @@ graph TD
 
 ## 🚀 四、 3秒极速上手 (Quick Start)
 
-你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 Spec-Driven V1.2.0 骨架：
+你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 Spec-Driven V1.3.0 骨架：
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash
@@ -142,6 +142,11 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 
 
 ## 📅 变更日志 (Change Log)
+
+### [V1.3.0] - 2026-07-09
+* **🚀 新增特性**：固化资产轨输入底线与智能体前置依赖防呆熔断。
+  * **工程根因**：独立开发者在第一阶段记录原始灵感时，易因缺乏标准而陷入“繁琐大厂 PRD 模板”或“完全口语化瞎扯”的两极分化宿疾，导致下游 AI 智能体缺乏高质量原料而盲目猜测意图；同时，若人类未完成图纸压榨便直接唤醒 AI 裸写代码，极易引发不可控的上下文漂移与代码库污染。
+  * **优化目的**：在 `product-assets/PRD/` 下默认构建 `README.md` 指引，强力约束人类输入必须包含【显式愿景】、【显式边界】与【负向约束】三要素；同时在 `.clinerules` / `.codexrules` 中硬编码第 `0` 条最高系统指令，凡检测到人类未完成“资产轨精炼”时，智能体必须立刻实施硬熔断（Stop），确保图纸在输入源码轨前具备绝对的确定性。
 
 ### [V1.2.0] - 2026-07-06
 * **🚀 新增特性**：引入“双向握手”与“运行环境双轨验证”机制。

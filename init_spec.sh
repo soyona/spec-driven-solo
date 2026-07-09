@@ -57,6 +57,7 @@ mkdir -p src/types src/components src/lib
 # 4. 写入常驻硬约束（AI 行为紧箍咒与熔断机制）
 cat << 'EOF' > .clinerules
 # 最高系统指令 (System Rules)
+0. 【开工依赖前置检查】：每次会话开始前，必须检查 `memory-bank/` 下的 `projectBrief.md` 与 `dataModels.md` 是否已被人类初始化。如果这两个文件为空、仅包含模板说明或方括号占位符，说明人类尚未完成“资产轨精炼”，你必须立刻停止（Stop）一切 Act 行为，并提示用户：“请先参考 product-assets/PRD/ 规范，前往 ChatGPT 网页端完成记忆图纸压榨后方可开工。”
 1. 每次会话开始前，必须完整通读 memory-bank/ 下的所有文件，重建对代码库的全局认知。
 2. 严禁改动任何未在 `memory-bank/activeContext.md` 中提及的源码文件。
 3. 【强类型契约】：编写任何业务逻辑前，必须严格对齐 `memory-bank/dataModels.md`。
@@ -147,6 +148,20 @@ EOF
 # 6. 创建源码轨的占位文件
 touch src/types/index.ts src/main.ts package.json tsconfig.json
 
+# ⚖️ 【新增特性 V1.2.0】写入资产轨原始输入规范
+cat << 'EOF' > product-assets/PRD/README.md
+# 🎨 资产轨输入说明 (Raw Requirements)
+
+本目录由人类开发者完全主导。你可以使用 `.txt` 或 `.md` 自由记录你的口语化创意或原始需求单。
+
+## 📝 输入底线：请务必确保你的内容包含以下“三要素”：
+1. **🎯 显式愿景**：产品是什么？解决什么核心痛点？
+2. **🚧 显式边界 (Out of Scope)**：V1.0 阶段绝对**不做**什么？（如：不做登录、不接真实数据库、全Mock）。
+3. **🛑 负向约束**：技术或业务上坚决**不能**出现什么？（如：禁止引入生僻字、严禁使用外部复杂状态库）。
+
+内容准备就绪后，直接全选并复制给 ChatGPT 网页端，下达指令：“请扮演系统架构师，根据这份原始需求，严格按照 Spec-Driven Solo 规范，为我精炼输出 memory-bank/ 下的 projectBrief.md 和 dataModels.md 图纸。”
+EOF
+
 # ⚖️ 【新增特性 V1.2.0】写入标准 .gitignore 锁死 Agent 索引范围
 cat << 'EOF' > .gitignore
 node_modules/
@@ -161,5 +176,11 @@ EOF
 echo "--------------------------------------------------------"
 echo "✅ [Mac] Spec-Driven V1.2.0 目录结构一键初始化成功！"
 echo "📂 项目路径: $(pwd)"
+echo ""
+echo "🔥 [下一步核心实战指引]："
+echo " 1. 打开目录，在 'product-assets/PRD/' 下创建你的需求文件（.txt 或 .md 均可）。"
+echo " 2. 需求必须包含：[显式愿景]、[V1.0 不做什么]、[负向约束] 三要素。"
+echo " 3. 内容完成后，直接将其全选复制给 ChatGPT 网页端进行‘图纸压榨’。"
+echo ""
 echo "💡 提示: 请直接使用 VS Code / IDE 打开该目录，并将工作区访问权限授予您的 Codex / Cline 智能体开始协同开发。"
 echo "--------------------------------------------------------"
