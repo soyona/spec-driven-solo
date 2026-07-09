@@ -89,4 +89,4 @@ graph TD
 
 ##  脚本初始化
 
-按照以上规范可执行 `3.init_spec_project.sh ` 初始化目录。
+按照以上规范可执行 `3.init_spec.sh ` 初始化目录。
