@@ -186,5 +186,3 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 ## 📄 开源许可证
 
 本项目基于 [MIT License](https://www.google.com/search?q=https://github.com/soyona/spec-driven-solo/blob/main/LICENSE) 开源。欢迎所有超级个体自由地修改、分发并用于商业项目。
-
-```
