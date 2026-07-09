@@ -123,6 +123,15 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 ```
 执行完毕后，使用集成开发环境（IDE）打开该目录，并将工作区访问权限授予您的 Codex / Cline 智能体。
 
+⚙️ 「Agent 沙盒授权 Checklist」
+为了确保本地智能体（Cline / Roo-Cline / Codex）能够完美执行任务，请在首次打开项目时进行以下确认：
+
+权限一：文件读写 —— 确保插件设置中已赋予智能体 「Read and Write Files」 权限。
+
+权限二：终端执行 —— 确保插件设置中已赋予智能体 「Execute Commands」 权限。
+
+免配即用 —— 本脚手架已在根目录默认内置 .clinerules，智能体连接后将自动读取并被硬性约束。
+
 ---
 
 ## 📘 五、 进阶指南
