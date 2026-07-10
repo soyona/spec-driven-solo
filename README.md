@@ -1,4 +1,4 @@
-# 📘 Spec-Driven Solo 开发工程规范 (V2.0.0-Matrix)
+# 📘 Spec-Driven Solo 开发工程规范 (V2.1.0-Kernel)
 
 > **专为 ChatGPT Plus (Web) + Codex / Cline / Roo-Cline 架构设计的矩阵化、多形态三轨工程标准。旨在通过动态注入特化技术轮廓（Tech Profile）与硬性宿主路由拦截，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、状态丢失、环境漂移以及无限执行死循环等核心痛点。**
 
@@ -13,7 +13,7 @@
 
 若直接将传统研发习惯沿用至 AI 协同流水线中，将不可避免地遭遇以下由 Agent 机制缺陷导致的系统性工程痛点：
 
-* **❌ 无约束异常修复（Token 异常消耗）**：在终端运行编译或 Lint 报错后，智能体容易进入“盲目修改 $\rightarrow$ 引入新错 $\rightarrow$ 再次盲目修改”的递归尝试中。这种缺乏根因验证的高频试错，极易陷入死循环，导致上下文窗口与 Token 额度异常消耗。
+* **❌ 无约束异常修复（Token 异常消耗）**：在终端运行编译或 Lint 报错后，智能体容易进入“盲目修改 -> 引入新错 -> 再次盲目修改”的递归尝试中。这种缺乏根因验证的高频试错，极易陷入死循环，导致上下文窗口与 Token 额度异常消耗。
 * **❌ 上下文窗口饱和（历史状态丢失）**：随着代码库规模线性增长，超出上下文窗口限制会导致历史状态丢失。智能体将失去对全局代码库的宏观认知，引发偏离初始产品愿景、重复编写已有逻辑、或引入未授权第三方冗余依赖等问题。
 * **❌ 隐式契约脱节（重构与集成缺陷）**：过于依赖自然语言口语化输入，缺乏结构化、确定性的强类型契约支撑。当前后端或组件边界发生重构时，智能体无法自动感知变更边界，极易引入隐性回归缺陷。
 
@@ -48,6 +48,7 @@
 │   ├── 📂 PRD/                    # 原始需求文档、用户故事随笔、核心业务流
 │   ├── 📂 wireframes/             # UI 截图、原型图说明、Figma/设计稿引用链接
 │   └── 📂 research/               # 竞品调研、市场灵感、用户反馈记录
+│       └── 📄 tech-review.md      # ❄️ 【V2.1.0 冰封资产】红队论证与底层技术选型结论
 │
 ├── 📂 memory-bank/                # 🧠 【记忆轨】AI 外部持久化大脑（AI 高频读写，核心控制中枢）
 │   ├── 📄 projectBrief.md         # 基础：产品愿景、核心范围、显式非目标（不做什么）
@@ -74,7 +75,7 @@
 
 ### 1. 轨道职责隔离
 
-* **资产轨 (`product-assets/`)**：存放未精炼的人类原始口语化需求。智能体在编码阶段严禁高频扫描此目录，以防止污染上下文空间。
+* **资产轨 (`product-assets/`)**：存放未精炼的人类原始口语化需求及由云端压榨出的红队论证。本地智能体在编码阶段严禁扫描或只读检索此目录下的 tech-review.md，只在初始化阶段引用，以此阻止高频 Token 损耗。
 * **记忆轨 (`memory-bank/`)**：由网页端将上游原料精炼后的标准工程图纸。所有文件采用高度结构化的 Markdown 格式，用以锁死技术边界与数据契约。
 * **源码轨 (`src/`)**：智能体自动生成的唯一纯代码输出目标，由人类开发者实施差分审计（Diff Audit）。
 
@@ -82,16 +83,17 @@
 
 项目根目录下的 `.clinerules / .codexrules` 会在全局层面劫持 AI Agent 的系统提示词：
 
-> 0. **矩阵型开工依赖检查**：每次会话开始前，必须物理检查 memory-bank/ 下的 projectBrief.md 与 dataModels.md 是否已被人类通过所选的技术轮廓成功初始化。如果文件为空或仅包含模板说明，你必须立刻停止（Stop）一切 Act 行为，强制熔断并报警！
+> 0. **矩阵型开工依赖检查**：每次会话开始前，必须物理检查 memory-bank/ 下的 projectBrief.md 与 dataModels.md 以及 techContext.md是否已被人类通过所选的技术轮廓成功初始化。如果文件为空或仅包含模板说明，你必须立刻停止（Stop）一切 Act 行为，强制熔断并报警！
+>    * **核心熔断锁**：若 techContext.md 顶部的 ## ⚖️ 架构师核心技术选型论证 (Arch Review) 中的 人类审查状态 不为 APPROVED，你必须立刻停止（Stop）一切 Act 行为，强制熔断并报警！
 > 1. **状态同步**：每次对话开始前，必须完整通读 `memory-bank/` 下的所有文件，重建对代码库的全局认知。
-> 2. **契约对齐**：严禁改动任何未在 `activeContext.md` 中提及的源码文件[cite: 9]；编写业务逻辑前，必须严格对齐 `dataModels.md` 的强类型[cite: 9]。
+> 2. **契约对齐**：严禁改动任何未在 `activeContext.md` 中提及的源码文件；编写业务逻辑前，必须严格对齐 `dataModels.md` 的强类型[cite: 9]。
 > 3. **💥 3次异常熔断线**：在终端运行检查、编译或测试命令时，一旦**连续失败超过 3 次**，必须立刻停止（Stop）一切 Act 行为，向人类如实报告原始日志并挂起会话。**严禁盲目猜测修改**。
 > 4. **⚙️ 记忆回写即交付 (No Log, No Done)**：你在声称任何任务“修复完成”或“请求验收”前，【必须且只能】将物理更新 `memory-bank/activeContext.md` 与 `memory-bank/progress.md` 作为你 Act 行为的最后一步。若仅修改源码而未同步外部化状态（EST），则判定为【非法交付】，系统将拒绝承认并原地锁定。
 > 5. **🌐 运行环境双轨验证**：除通过 Lint 和 Build 静态三层卡点外，若涉及局域网（192.168.x.x）或物理真机调试，必须在前置配置轨中显式允许安全源（如 Next.js 的 allowedDevOrigins），严禁产生隐式运行时跨域死锁。
 > 6. **🛠️ 宿主编译与形态特化防线**：智能体必须遵循当前激活的形态开展针对性编译。例如：
-> * **微信小程序 (Taro)**：本地构建体积若超过 2MB 物理极限，必须触发硬熔断提示分包。
-> * **跨平台桌面端 (Tauri)**：智能体必须同时监控前后端编译器（cargo check），且 Rust 侧严禁出现任何未经捕获的 panic! 恐慌。
-> * **复杂数据后台 (Next.js)**：严格监控组件依赖项，预防由数据级高频局部订阅导致的服务端/前端无效高频重渲染死循环。
+>    * **微信小程序 (Taro)**：本地构建体积若超过 2MB 物理极限，必须触发硬熔断提示分包。
+>    * **跨平台桌面端 (Tauri)**：智能体必须同时监控前后端编译器（cargo check），且 Rust 侧严禁出现任何未经捕获的 panic! 恐慌。
+>    * **复杂数据后台 (Next.js)**：严格监控组件依赖项，预防由数据级高频局部订阅导致的服务端/前端无效高频重渲染死循环。
 
 ---
 
@@ -101,11 +103,12 @@
 
 ```mermaid
 graph TD
-    A[1. 人类在 product-assets 生成原始想法] --> B[2. 网页端大模型精炼出 memory-bank 规范]
-    B --> C[3. 启动本地 Agent强制通读 memory-bank 以重建状态]
-    C --> D[4. 智能体严格按照规范修改 src 源码层]
-    D --> E[5. 编译与测试成功后, 智能体更新 progress.md 与 activeContext.md]
-    E --> B
+    A[1. 人类在 product-assets 生成原始想法] --> B[2. 网页端大模型精炼出 memory-bank 规范与冰封资产]
+    B --> C[3. 人类回填图纸并手动将 techContext 审查状态修改为 APPROVED 通电放行]
+    C --> D[4. 启动本地 Agent 强制通读 memory-bank 以重建状态并开工]
+    D --> E[5. 智能体严格按照规范修改 src 源码层]
+    E --> F[6. 编译与测试成功后, 智能体更新 progress.md 与 activeContext.md]
+    F --> B
 
 ```
 
@@ -113,7 +116,7 @@ graph TD
 
 ## 🚀 四、 3秒极速上手 (Quick Start)
 
-你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 **Spec-Driven V2.0.0-Matrix** 骨架：
+你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 **Spec-Driven V2.1.0-Kernel** 骨架：
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash
@@ -142,16 +145,22 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 
 为了更深入地理解底层设计模式与工作流自动化，请参阅随附 docs/ 的技术指南：
 
-* [1-Spec-Driven Solo 开发工程规范 V1.0](https://github.com/soyona/spec-driven-solo/blob/main/docs/1-engineering-spec.md) ：深入理解三轨制的协作法理与目录哲学。
-* [2-Spec-Driven Solo 新手入门指南 V1.0](https://github.com/soyona/spec-driven-solo/blob/main/docs/2-beginner-guide.md) ：手把手带你进行第一次“图纸压榨”与“人机协同 Review”，内含通关 Prompt 咒语。
+* [1-Spec-Driven Solo 开发工程规范](https://github.com/soyona/spec-driven-solo/blob/main/docs/1-engineering-spec.md) ：深入理解三轨制的协作法理与目录哲学。
+* [2-Spec-Driven Solo 新手入门指南](https://github.com/soyona/spec-driven-solo/blob/main/docs/2-beginner-guide.md) ：手把手带你进行第一次“图纸压榨”与“人机协同 Review”，内含通关 Prompt 与不断层逃逸格式。
 
 ---
 
 
 ## 📅 变更日志 (Change Log)
 
-### [V2.0.0-Matrix] - 2026-07-09
+### [V2.1.0-Kernel] - 2026-07-11
+* **🚀 新增特性：云端/本地双脑“冰封物理资产”与“人类主权通电开关”**。
+* **工程根因**：解决在大段技术规格审计或历史选型论证中，本地 Agent 频繁扫描无用静态文本，导致上下文快速饱和及 Token 账单暴涨的问题。
+* **优化目的**：
+    1. 将技术可行性研究、架构选型结论从 techContext.md 中物理剥离，隔离至 product-assets/research/tech-review.md 中冷冻。
+    2. 强制在 techContext.md 顶端引入 人类审查状态: PENDING / APPROVED。本地 Agent 面对空项目、未审查项目直接进入防呆熔断。只有人类将其手动改为 APPROVED 才能全面通电放行。
 
+### [V2.0.0-Matrix] - 2026-07-09
 * **🚀 新增特性**：**全形态技术轮廓 (Tech Profile) 矩阵化分流系统**。
 * **工程根因**：原 V1.x 版本采用单一 Web 状态机和一刀切的编译黑名单规则，无法适应 Solo 开发者在多端（如跨端微信小程序、Tauri 桌面端沙盒隔离、Next.js 混合架构）下的异构编译卡点，导致 AI 频繁在小程序上安装原生 UI 库、或在桌面端写出让 Rust 恐慌（`panic!`）的越权脚本。
 * **优化目的**：引入交互式脚手架初始化菜单，将状态拓扑层（如特许解禁低熵 Zustand、或是强制锁死 React Context）、宿主路由拦截命令及负向约束，根据人类选择的形态，**精准向下一体化投影**至物理规则文件（`.clinerules` 及 `techContext.md`）中，形成全形态的确定性防线。
