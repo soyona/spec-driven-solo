@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # ==============================================================================
-# 🚀 Spec-Driven Solo 开发工程规范 (V2.1.0-Kernel) - 矩阵化一键初始化元内核版
+# 🚀 Spec-Driven Solo 开发工程规范 (V2.2.0-Kernel-Rotator) - 自动瘦身降噪初始化版
 # 使用方法: 
 #   1. bash init_spec.sh             (将以当前日期命名创建项目)
 #   2. bash init_spec.sh my-cool-app (自定义项目名称)
-# 
+#
+# 🛠️ 升级核心：集成防只读内耗断路器、.clineignore 物理盲区、动态记忆体冷热轮转规约
 # 赋予权限命令: chmod +x init_spec.sh
 # ==============================================================================
 
@@ -43,7 +44,7 @@ if [ -d "$PROJECT_NAME" ]; then
             ;;
     esac
 else
-    echo "📂 正在初始化 Spec-Driven V2.1.0-Kernel 项目: ${PROJECT_NAME}..."
+    echo "📂 正在初始化 Spec-Driven V2.2.0-Kernel-Rotator 项目: ${PROJECT_NAME}..."
 fi
 
 # 🎯 3. 产品经理与架构师防线：技术轮廓 (Tech Profile) 矩阵交互选择
@@ -61,7 +62,7 @@ if [ -z "$PROFILE_CHOICE" ]; then
     PROFILE_CHOICE=1
 fi
 
-# 【资深架构师补丁 V2.1.0-Kernel】：将自然语言重构为冰冷的元依赖与行为特征约束词
+# 【资深架构师补丁】：将自然语言重构为冰冷的元依赖与行为特征约束词
 
 case $PROFILE_CHOICE in
     2)
@@ -120,7 +121,7 @@ EOF
 
 # 7. 写入多模态常驻硬约束（通用元内核自适应版）
 cat << EOF > .clinerules
-# Spec-Driven Solo 最高系统指令 (V2.1.0-Kernel)
+# Spec-Driven Solo 最高系统指令 (V2.2.0-Kernel-Rotator)
 
 ## 0. 【核心技术准入前置锁】
 - 每次会话开始前的首要动作，你必须无条件物理读取 \`memory-bank/techContext.md\` 里的元依赖矩阵和 \`dataModels.md\` 的数据契约。
@@ -145,14 +146,27 @@ cat << EOF > .clinerules
 4. 【3次熔断线】：在终端运行检查、编译或测试命令时，一旦【连续失败超过 3 次】，必须立刻停止（Stop）一切 Act 行为，向人类如实报告原始日志并挂起会话。严禁盲目猜测与代码污染。
 5. 【运行时网络审计】：若当前开发、调试环境涉及跨设备、局域网（如 192.168.x.x）或物理真机调试，必须在前置配置轨中显式允许安全源（如 Next.js 的 allowedDevOrigins），严禁产生隐式运行时跨域死锁。
 
-## 🛠️ 宿主编译特殊防线
+## ❌ 6. 静态检索半径熔断与防重入锁 (Read/Search Circuit Breaker)
+1. 【防重复读取锁】：你在单次 Task 周期（同一个会话窗口）内，对同一个 Markdown 记忆文件（尤其是 activeContext 或 progress）执行 \`read_file\` 的累计次数【严禁超过 2 次】。你必须优先复用自身 Context Window 中已缓存的文本快照。一旦试图触发第 3 次物理读取，必须自我声明进入“内耗断路状态”，强行原地挂起（Stop）并提请人类审查！
+2. 【禁止全局盲搜】：严禁调用任何无路径限制的全局模糊检索命令（例：严禁执行全局 \`rg "关键词"\`）。你必须通过 \`-g\` 参数（例：\`rg "关键词" src/components/\`）或直接指定精准的目标文件名，将检索半径严格限制在受影响的特定代码块内，严禁将全量源码树无故读入上下文！
+3. 【回归验证降级】：对于局部 UI 样式或局部 DOM 的 Bug 修复，必须优先依赖静态编译或类型检查进行回归验证。严禁无故高频启动 \`In-App Browser\` 执行端到端交互走查，只有在涉及复杂重绘且编译通过后，方可进行【单次】浏览器快照验证。
+
+## 🧠 7. 微创定位与独立内聚重构准则
+- 当接收到修复单时，禁止无脑通读整个记忆区。必须采用“逆向追溯法”，优先检查 Git 差异或直接读取报错表现涉及的单一核心组件。
+- 在内部推演出根因因果链后，方可向源码轨申请修改。若发现底层资产（如 background-image）存在打印等物理环境设计缺陷，允许且仅允许对受影响的目标文件进行内联内聚式重构（如使用内联 SVG 替代背景图）。
+
+## 💾 8. 动态记忆体轮转与瘦身规约 (Memory Rotation Protocol)
+1. 【activeContext.md 瘦身】：当 \`activeContext.md\` 的物理行数超过 150 行，或记录的“历史已解决技术债”累积超过 5 项时，必须在当前 Task 结束前发起冷冻切片。将旧内容剪切移入并封存为 \`memory-bank/archive/activeContext_YYYYMMDD.md\`。原文件必须物理清空，仅保留当前特性的即时上下文和未解决的阻碍（Blockers）。
+2. 【progress.md 看板熔断】：当 \`progress.md\` 中被勾选为 \`[x]\` 的已完成任务累积超过 20 项时，必须将所有已打勾的历史清单剪切，追加移入 \`memory-bank/archive/progress_historical_logs.md\` 的末尾。主干 \`progress.md\` 仅允许保留 \`[ ]\`（未解锁特性）和当前的 \`[-]\`（攻坚任务）。
+
+## 🛠️ 库形态特化防线
 $TOOLCHAIN_ROUTER
 EOF
 cp .clinerules .codexrules
 
 # 8. 初始化解耦后的四大图纸文件（利用变量注入实现元插槽的静态固化）
 cat << EOF > memory-bank/techContext.md
-# 技术栈与依赖约束 (techContext.md V2.1.0-Kernel)
+# 技术栈与依赖约束 (techContext.md V2.2.0-Kernel-Rotator)
 
 ## ⚖️ 架构师核心技术选型论证 (Arch Review)
 - **人类审查状态**: PENDING
@@ -226,13 +240,13 @@ cat << 'EOF' > memory-bank/activeContext.md
 EOF
 
 cat << 'EOF' > memory-bank/progress.md
-# 任务进度看板 (progress.md V2.1.0-Kernel)
+# 任务进度看板 (progress.md V2.2.0-Kernel-Rotator)
 ## 🚦 核心准入依赖卡点
 * [ ] 网页端顶级架构师红队论证并输出 `tech-review.md` 封存至资产轨
 * [ ] 人类架构师走查白皮书，手动解锁 `techContext.md` 的人类审查状态为 `APPROVED`
 
 ## 🧱 🚀 开发进度清单
-[x] 项目 V2.1.0-Kernel 目录架构与特化规则配置初始化成功
+[x] 项目 V2.2.0-Kernel-Rotator 目录架构与特化规则配置初始化成功
 
 [ ] 云端第一阶段图纸压榨（projectBrief/dataModels/systemPatterns）完成并本地覆盖
 
@@ -260,8 +274,14 @@ cat << EOF > product-assets/PRD/README.md
 内容准备就绪后，直接全选并复制给 ChatGPT 网页端，配合【V2.1.0 架构师特化咒语】，下达指令：“请扮演特定领域的顶级架构师，进行红队技术可行性与选型论证，并严格按照 Spec-Driven Solo 规范，为我精炼输出隔离的 tech-review.md 以及带元依赖槽的记忆银行图纸。”
 EOF
 
-# 11. 写入标准 .gitignore 锁死 Agent 索引范围
-cat << 'EOF' > .gitignore
+# 11. 🔨 核心升级：写入强力的 Agent 物理盲区防线 (.clineignore)
+cat << 'EOF' > .clineignore
+# ==============================================================================
+# ❄️ SDD 资产隔离区：严禁 Agent 扫描、读取与建立向量索引的历史冷资产 (V2.2.0)
+# ==============================================================================
+memory-bank/archive/
+memory-bank/*_historical_logs.md
+product-assets/research/tech-review.md
 node_modules/
 dist/
 .DS_Store
@@ -272,16 +292,19 @@ out/
 next-env.d.ts
 EOF
 
+# 保持标准的 .gitignore 与物理盲区轨道绝对同步
+cp .clineignore .gitignore
+
 echo "--------------------------------------------------------"
-echo "✅ [Mac] Spec-Driven V2.1.0-Kernel 目录结构一键初始化成功！"
+echo "✅ [Mac] Spec-Driven V2.2.0-Kernel-Rotator目录结构一键初始化成功！"
 echo "📂 项目路径: $(pwd)"
 echo "👑 已锁定技术轮廓: $PROFILE_NAME"
 echo ""
-echo "🔥 [下一步内核激活指引]："
-echo " 1. 打开目录，在 'product-assets/PRD/' 下创建你的需求文件。"
-echo " 2. 全选后复制给网页端，压榨出长篇论证并冰封入 'product-assets/research/tech-review.md'。"
-echo " 3. 根据论证，手动将 'memory-bank/techContext.md' 的 🛑 Whitelist 和 ❌ Blacklist 槽位补全。"
-echo " 4. 确认无误后，手动将 '人类审查状态' 物理修改为 APPROVED，全面解除开工锁。"
+echo "🔥 [下一步防内耗激活指引]："
+echo " 1. 本地已默认构建 memory-bank/archive/ 冷资产目录与 .clineignore 盲区 [已升级]。"
+echo " 2. 请在 'product-assets/PRD/' 下创建你的业务需求。"
+echo " 3. 根据云端 Thinking 推演，补全 'memory-bank/techContext.md' 的 Whitelist。"
+echo " 4. 确认无误后，手动将 '人类审查状态' 物理修改为 APPROVED，解除开工锁！"
 echo ""
-echo "💡 提示: 请直接使用 VS Code / IDE 打开该目录，并将工作区访问权限授予您的 Codex / Cline 智能体开始协同开发。"
+echo "💡 提示: 本脚手架已在根目录内置最新的防内耗与轮转熔断铁律，Agent 连接后将自动锁定行为边界。"
 echo "--------------------------------------------------------"
