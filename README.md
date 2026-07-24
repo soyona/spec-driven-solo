@@ -83,11 +83,25 @@
 
 ## ⚖️ 二、 三轨制协作法理与最高铁律
 
-### 1. 轨道职责隔离
+### 1. 轨道职责隔离与核心契约
 
-* **资产轨 (`product-assets/`)**：存放未精炼的人类原始口语化需求及由云端压榨出的红队论证。本地智能体在编码阶段严禁扫描或只读检索此目录下的 tech-review.md，只在初始化阶段引用，以此阻止高频 Token 损耗。
-* **记忆轨 (`memory-bank/`)**：由网页端将上游原料精炼后的标准工程图纸。所有文件采用高度结构化的 Markdown 格式，用以锁死技术边界与数据契约。引入 **Archive 机制** 定期对历史看板和上下文实施冷冻脱水，防止智能体记忆过载。
-* **源码轨 (`src/`)**：智能体自动生成的唯一纯代码输出目标，由人类开发者实施差分审计（Diff Audit）。
+#### 🎨 资产轨 (`product-assets/`)
+* **主体职责**：人类。存放所有发散、口语化、未经过提炼的产品和设计资产及云端论证结论（如 `PRD/`、`wireframes/`、`research/tech-review.md`）。
+* **控制机制**：**AI 编码阶段严禁高频扫描或只读检索此目录**。它只是 `memory-bank/` 的上游原料库。当你有新想法或新原型图时，尽管扔进这里，绝对不会干扰当前正在编写的代码分支。
+
+#### 🧠 记忆轨 (`memory-bank/`)
+* **主体职责**：AI 读写、人类质检。由 ChatGPT 网页端将“资产轨”上游原料翻译并精炼后的“高纯度工程图纸”。所有文件采用高度结构化的 Markdown 格式，用以锁死技术边界与数据契约。
+* **核心文件契约**：
+  * `projectBrief.md`（**划定边界**）：明确写出“非目标（Out of Scope）”，一旦 AI 试图写出超出边界的功能，系统会自动提示违规。
+  * `techContext.md`（**技术锁死与审查通电**）：声明编译命令，锁死技术栈并声明“黑名单库”（如：禁止自作主张安装 Redux 或 Axios）。顶部包含人类审查状态（`PENDING` / `APPROVED`），未经人类批准时本地 Agent 强制熔断挂起。
+  * `dataModels.md`（**契约补丁**）：不准用自然语言描述数据，**必须直接使用标准的 TypeScript Interface 锁死所有核心数据结构**。它是前后端交互的最高法律。
+  * `activeContext.md`（**防失忆与轮转瘦身**）：记录即时上下文、技术债与阻碍（Blocker）。物理行数超过 150 行时自动触发物理脱水，冷冻切片归档至 `memory-bank/archive/`。
+  * `progress.md`（**进度锚点**）：切香肠式 `[ ]` 与 `[x]` 可执行清单。AI 每成功编译一个特性，必须在此文件中打勾；已完成任务超 20 项触发冷冻归档。
+  * `archive/`（**物理隔离盲区**）：配合 `.clineignore` 存放已脱水的历史看板与上下文，强制 Agent 实施物理脱水，禁止扫描读取。
+
+#### 🛠️ 源码轨 (`src/`)
+* **主体职责**：AI 自动生成，人类 Diff 审计。智能体唯一的纯代码输出目标。
+* **类型对齐要求**：`src/types/` 必须作为强类型镜像，完全映射并引用 `memory-bank/dataModels.md` 中的强类型契约。
 
 ### 2. 行为准则与硬熔断协议
 
@@ -157,8 +171,7 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 
 为了更深入地理解底层设计模式与工作流自动化，请参阅随附 docs/ 的技术指南：
 
-* [1-Spec-Driven Solo 开发工程规范](https://github.com/soyona/spec-driven-solo/blob/main/docs/1-engineering-spec.md) ：深入理解三轨制的协作法理与目录哲学。
-* [2-Spec-Driven Solo 新手入门指南](https://github.com/soyona/spec-driven-solo/blob/main/docs/2-beginner-guide.md) ：手把手带你进行第一次“图纸压榨”与“人机协同 Review”，内含通关 Prompt 与不断层逃逸格式。
+* [Spec-Driven Solo 新手入门指南](https://github.com/soyona/spec-driven-solo/blob/main/docs/beginner-guide.md) ：手把手带你进行第一次“图纸压榨”与“人机协同 Review”，内含通关 Prompt 与不断层逃逸格式。
 
 ---
 
