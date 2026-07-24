@@ -72,6 +72,10 @@
 │
 ├── 📄 package.json                # 依赖管理清单
 └── 📄 tsconfig.json               # 严格的 TypeScript 编译配置文件
+├── 📄 CONTRIBUTING.md           # 📖 【主文档】维护者工程规范、SOP 与升级铁律
+└── 📂 .github/
+    └── 📂 ISSUE_TEMPLATE/       # 📄 【自动化】版本升级与 Feature 提案模板
+        └── 📄 release_checklist.md
 
 ```
 
@@ -216,3 +220,9 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 ## 📄 开源许可证
 
 本项目基于 [MIT License](https://www.google.com/search?q=https://github.com/soyona/spec-driven-solo/blob/main/LICENSE) 开源。欢迎所有超级个体自由地修改、分发并用于商业项目。
+
+---
+
+## 🛠️ 规范贡献与维护
+
+如果您希望参与 **Spec-Driven Solo** 规范的维护、新增技术轮廓（Tech Profile）或提交改进提案，请参阅我们的 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解维护者 SOP 与打包断言规范。
