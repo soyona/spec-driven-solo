@@ -1,4 +1,4 @@
-# 📘 Spec-Driven Solo 开发工程规范 (V2.2.0-Kernel-Rotator)
+# 📘 Spec-Driven Solo 开发工程规范 (V2.3.0-Kernel-Rotator)
 
 > **专为 ChatGPT Plus (Web) + Codex / Cline / Roo-Cline 架构设计的矩阵化、多形态三轨工程标准。旨在通过集成防只读内耗断路器、.clineignore 物理盲区、以及动态记忆体冷热轮转规约，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、Token 侧漏、上下文饱和、历史状态丢失以及盲目重试死循环等核心痛点。**
 
@@ -160,11 +160,12 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 
 
 ## 📅 变更日志 (Change Log)
-### [V2.2.0-Physical-Align] - 2026-07-24
-* **🚀 新增特性：100% 物理目录树对齐与单文件发布打包架构**。
+
+### [V2.3.0-Physical-Align] - 2026-07-24
+* **🚀 正式发布：单文件发布架构归一化与目录清理**。
 * **优化目的**：
-  1. 将 `templates/` 多模版资产与核心 CLI 执行逻辑解耦，通过 `build.sh` 实现跨平台安全的纯文本内嵌与压缩。
-  2. 部署物理节点存在性断言测试卡点（Assertion Suite），确保脚手架一键生成的物理目录树与规范 100% 严丝合缝。
+  1. 遵循单源真理原则，物理删除根目录 `init_spec.sh`，统一收口至 `release/init_spec.sh`。
+  2. 全量对齐文档、模版与 CLI 脚本的版本标记至 `v2.3.0`。
 
 ### [V2.2.0-Kernel-Rotator] - 2026-07-18
 * **🚀 新增特性：集成物理隔离盲区 (`.clineignore`) 与动态记忆体轮转规约 (`Memory Rotation`)**。
