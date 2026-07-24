@@ -47,21 +47,37 @@ graph TD
 cd /tmp && rm -rf test-spec-app
 /路径/到/spec-driven-solo/release/init_spec.sh test-spec-app
 
-# 执行物理存在性断言
+# 执行 100% 物理存在性断言
 cd test-spec-app
 test -f .clinerules && \
 test -f .codexrules && \
 test -f .clineignore && \
-test -d memory-bank/archive && \
+test -f .gitignore && \
+test -f package.json && \
+test -f tsconfig.json && \
+test -d product-assets/PRD && \
+test -d product-assets/wireframes && \
+test -f product-assets/research/tech-review.md && \
 test -f memory-bank/projectBrief.md && \
-echo "🎉 [ASSERTION PASSED]: 所有物理节点 100% 精准对齐！"
+test -f memory-bank/techContext.md && \
+test -f memory-bank/systemPatterns.md && \
+test -f memory-bank/dataModels.md && \
+test -f memory-bank/activeContext.md && \
+test -f memory-bank/progress.md && \
+test -d memory-bank/archive && \
+test -f src/types/index.ts && \
+test -d src/components && \
+test -d src/lib && \
+test -f src/main.ts && \
+echo "🎉 [ASSERTION PASSED]: 所有物理节点 100% 精准对齐！零遗漏，零偏差！"
 
 ```
 
 ### 4. 版本同步与 Git 发布
 
 1. 同步更新 `README.md` 中的 Change Log 与 Quick Start 路径。
-2. 运行发布命令：
+2. (可选) 在 GitHub 发起 Release 提案时，建议选用 .github/ISSUE_TEMPLATE/release_checklist.md 模板进行逐项走查打勾。
+3. 运行发布命令：
 ```bash
 git add .
 git commit -m "chore: release vX.Y.Z"
