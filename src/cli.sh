@@ -137,7 +137,7 @@ EOF
 
 # 5. 资产轨：冰封资产落盘
 cat << 'EOF' > product-assets/research/tech-review.md
-# ❄️ 【V2.1.0 冰封资产】红队论证与底层技术选型结论
+# ❄️ 【冰封资产】红队论证与底层技术选型结论
 > 本文件为云端上游红队论证产物，Agent 仅允许读取，严禁修改。
 EOF
 

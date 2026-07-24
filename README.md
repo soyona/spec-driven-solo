@@ -1,4 +1,4 @@
-> **当前规范版本**：`V2.3.4` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
+> **当前规范版本**：`V2.3.5` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
 # 📘 Spec-Driven Solo 开发工程规范
 
 > **专为 ChatGPT Plus (Web) + Codex / Cline / Roo-Cline 架构设计的矩阵化、多形态三轨工程标准。旨在通过集成防只读内耗断路器、.clineignore 物理盲区、以及动态记忆体冷热轮转规约，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、Token 侧漏、上下文饱和、历史状态丢失以及盲目重试死循环等核心痛点。**
@@ -178,7 +178,8 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 
 
 ## 📅 变更日志 (Change Log)
-
+### [V2.3.5-release.sh] - 2026-07-24
+* **单源真理（Single Source of Truth, SSOT），取消版本号**.
 ### [V2.3.2-release.sh] - 2026-07-24
 * **增加release.sh脚本一键发布**.
 ### [V2.3.0-Physical-Align] - 2026-07-24
