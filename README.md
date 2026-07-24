@@ -179,6 +179,8 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 
 ## 📅 变更日志 (Change Log)
 
+### [V2.3.2-release.sh] - 2026-07-24
+* **增加release.sh脚本一键发布**.
 ### [V2.3.0-Physical-Align] - 2026-07-24
 * **🚀 正式发布：单文件发布架构归一化与目录清理**。
 * **优化目的**：
