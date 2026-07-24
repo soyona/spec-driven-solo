@@ -45,7 +45,8 @@
 
 ```text
 你的项目根目录/
-├── 📄 .clinerules / .codexrules   # ⚖️ 【系统铁律】最高优先级 AI 行为紧箍咒（含强熔断机制）
+├── 📄 .clinerules                 # ⚖️ 【系统铁律】最高优先级 AI 行为紧箍咒（含强熔断机制）
+├── 📄 .codexrules                 # ⚖️ Mirror 系统铁律 (Codex 镜像副本)
 ├── 📄 .clineignore                # ❄️ 【物理盲区】智能体底层物理防火墙（彻底杜绝冷资产扫描）
 │
 ├── 📂 product-assets/             # 🎨 【资产轨】人类初始想法与产品资产（AI 仅读，严禁高频扫描）
@@ -126,12 +127,12 @@ graph TD
 你无需手动创建这一堆繁琐的目录和规则文件。在 Mac / Linux 终端中，直接在你想创建项目的目录下运行以下命令，即可一键生成带有强交付卡点与环境验证的标准的 **Spec-Driven** 骨架：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash
+curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/release/init_spec.sh | bash
 ```
 
 ### 自定义项目名称：
 ```bash
-curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_spec.sh | bash -s my-cool-app
+curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/release/init_spec.sh | bash -s my-cool-app
 ```
 
 
@@ -159,6 +160,11 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/init_s
 
 
 ## 📅 变更日志 (Change Log)
+### [V2.2.0-Physical-Align] - 2026-07-24
+* **🚀 新增特性：100% 物理目录树对齐与单文件发布打包架构**。
+* **优化目的**：
+  1. 将 `templates/` 多模版资产与核心 CLI 执行逻辑解耦，通过 `build.sh` 实现跨平台安全的纯文本内嵌与压缩。
+  2. 部署物理节点存在性断言测试卡点（Assertion Suite），确保脚手架一键生成的物理目录树与规范 100% 严丝合缝。
 
 ### [V2.2.0-Kernel-Rotator] - 2026-07-18
 * **🚀 新增特性：集成物理隔离盲区 (`.clineignore`) 与动态记忆体轮转规约 (`Memory Rotation`)**。
