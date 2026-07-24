@@ -16,9 +16,9 @@
 
 ```mermaid
 graph TD
-    A[1. 源码/模版修改 (src & templates)] --> B[2. 本地打包 (./build.sh)]
-    B --> C[3. 沙盒物理断言测试 (/tmp)]
-    C --> D[4. 版本同步与 Release 发布]
+    A["1. 源码/模版修改 (src & templates)"] --> B["2. 本地打包 (./build.sh)"]
+    B --> C["3. 沙盒物理断言测试 (/tmp)"]
+    C --> D["4. 版本同步与 Release 发布"]
 ```
 
 ### 1. 修改源码轨与模版轨
