@@ -51,6 +51,7 @@ cd /tmp && rm -rf test-spec-app
 cd test-spec-app
 test -f .clinerules && \
 test -f .codexrules && \
+test -f AGENTS.md && \
 test -f .clineignore && \
 test -f .gitignore && \
 test -f package.json && \

@@ -119,6 +119,7 @@ render_template_file() {
 # 4. 根目录系统规则与防线落盘
 render_template_file "$TMP_DIR/templates/rules/clinerules.md.tpl" ".clinerules"
 cp .clinerules .codexrules
+render_template_file "$TMP_DIR/templates/rules/agents.md.tpl" "AGENTS.md"
 render_template_file "$TMP_DIR/templates/base/clineignore.tpl" ".clineignore"
 
 cat << 'EOF' > .gitignore

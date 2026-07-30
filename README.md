@@ -46,6 +46,7 @@
 
 ```text
 你的项目根目录/
+├── 📄 AGENTS.md                   # 🤖 Codex 自动发现入口（引导读取 .codexrules）
 ├── 📄 .clinerules                 # ⚖️ 【系统铁律】最高优先级 AI 行为紧箍咒（含强熔断机制）
 ├── 📄 .codexrules                 # ⚖️ Mirror 系统铁律 (Codex 镜像副本)
 ├── 📄 .clineignore                # ❄️ 【物理盲区】智能体底层物理防火墙（彻底杜绝冷资产扫描）
@@ -106,7 +107,7 @@
 
 ### 2. 行为准则与硬熔断协议
 
-项目根目录下的 `.clinerules / .codexrules` 会在全局层面劫持 AI Agent 的系统提示词：
+项目根目录下的 `.clinerules / .codexrules` 定义仓库级 AI Agent 行为准则；`AGENTS.md` 作为 Codex 自动发现入口，要求 Codex 在开工前完整读取 `.codexrules`，避免复制规则导致多源漂移：
 
 > 0. **矩阵型开工依赖检查**：每次会话开始前，必须物理检查 memory-bank/ 下的 projectBrief.md 与 dataModels.md 以及 techContext.md 是否已被人类通过所选的技术轮廓成功初始化。如果文件为空或仅包含模板说明，你必须立刻停止（Stop）一切 Act 行为，强制熔断并报警！
 >    * **核心熔断锁**：若 techContext.md 顶部的 ## ⚖️ 架构师核心技术选型论证 (Arch Review) 中的 人类审查状态 不为 APPROVED，你必须立刻停止（Stop）一切 Act 行为，强制熔断并报警！
