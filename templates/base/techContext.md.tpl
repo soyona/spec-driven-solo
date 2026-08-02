@@ -1,7 +1,7 @@
 # ⚙️ 技术依赖与运行约束 (techContext.md)
 
 ## ⚖️ 架构师审查状态 (Arch Review)
-- **当前状态**: APPROVED
+- **当前状态**: PENDING
 - **构建指令**: `__COMPILE_CMD__`
 - **状态策略**: `__STATE_STRATEGY__`
 

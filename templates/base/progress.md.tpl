@@ -4,7 +4,7 @@
 
 ### Phase 1: 基础设施与骨架搭建
 - [x] 物理工程目录树 100% 对齐初始化
-- [x] 系统铁律 (`.clinerules`) 与物理防火墙 (`.clineignore`) 落盘
+- [x] Codex 自动发现入口 (`AGENTS.md`) 与项目规则 (`.codexrules`) 落盘
 - [ ] `src/types/index.ts` 补全领域数据契约
 - [ ] 基础页面与组件骨架渲染测试
 

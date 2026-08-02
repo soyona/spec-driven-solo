@@ -116,11 +116,9 @@ render_template_file() {
     fi
 }
 
-# 4. 根目录系统规则与防线落盘
-render_template_file "$TMP_DIR/templates/rules/clinerules.md.tpl" ".clinerules"
-cp .clinerules .codexrules
+# 4. Codex 自动发现入口与项目规则落盘
+render_template_file "$TMP_DIR/templates/rules/codexrules.md.tpl" ".codexrules"
 render_template_file "$TMP_DIR/templates/rules/agents.md.tpl" "AGENTS.md"
-render_template_file "$TMP_DIR/templates/base/clineignore.tpl" ".clineignore"
 
 cat << 'EOF' > .gitignore
 # ⚙️ 依赖与产物
@@ -130,7 +128,7 @@ out/
 .DS_Store
 *.log
 
-# 映射物理盲区
+# 项目本地状态与冷归档
 memory-bank/archive/
 memory-bank/*_historical_logs.md
 product-assets/research/tech-review.md

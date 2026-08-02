@@ -23,7 +23,8 @@ graph TD
 
 ### 1. 修改源码轨与模版轨
 
-* **修改 AI 系统铁律**：编辑 `templates/rules/clinerules.md.tpl`。
+* **修改 Codex 项目规则**：编辑 `templates/rules/codexrules.md.tpl`。
+* **修改 Codex 自动发现入口**：编辑 `templates/rules/agents.md.tpl`。
 * **修改 CLI 逻辑或交互**：编辑 `src/cli.sh`。
 * **修改模版文件**：编辑 `templates/` 对应 Profile 目录下的内容。
 
@@ -49,10 +50,10 @@ cd /tmp && rm -rf test-spec-app
 
 # 执行 100% 物理存在性断言
 cd test-spec-app
-test -f .clinerules && \
 test -f .codexrules && \
 test -f AGENTS.md && \
-test -f .clineignore && \
+test ! -e .clinerules && \
+test ! -e .clineignore && \
 test -f .gitignore && \
 test -f package.json && \
 test -f tsconfig.json && \
@@ -70,6 +71,8 @@ test -f src/types/index.ts && \
 test -d src/components && \
 test -d src/lib && \
 test -f src/main.ts && \
+rg -q '\.codexrules' AGENTS.md && \
+test -z "$(rg -n '__[A-Z0-9_]+__' AGENTS.md .codexrules memory-bank)" && \
 echo "🎉 [ASSERTION PASSED]: 所有物理节点 100% 精准对齐！零遗漏，零偏差！"
 
 ```
@@ -90,7 +93,7 @@ git push origin main --tags
 
 ## 💬 维护者 AI 协同 Prompt
 
-如果你在使用 AI 助手（ChatGPT / Claude / Cursor / Cline）协助演进本规范，请将以下 Prompt 复制给 AI：
+如果你在使用 Codex 协助演进本规范，请将以下 Prompt 复制给 Codex：
 
 你现在是 AI Coding 规范“Spec-Driven Solo”的资深元架构师 (Meta-Architect) 与核心维护者。
 你了解本仓库采用的是“开发轨源码多模版解耦 + 编译期单文件打包 + 物理存在性断言”的元脚手架架构。

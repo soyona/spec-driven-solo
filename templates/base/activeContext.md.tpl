@@ -1,6 +1,3 @@
-**作用**：生成 `memory-bank/activeContext.md`（即时上下文与即时决策）
-
-```markdown
 # ⚡ 即时执行上下文 (activeContext.md)
 
 ## 🎯 当前聚焦 Task (Active Task)
