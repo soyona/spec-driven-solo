@@ -1,4 +1,4 @@
-> **当前规范版本**：`v2.4.0` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
+> **当前规范版本**：`v2.4.1` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
 # 📘 Spec-Driven Solo 开发工程规范
 
 > **专为 ChatGPT Plus (Web) + Codex 架构设计的矩阵化、多形态三轨工程标准。旨在通过 Codex 项目规则、精确读取预算以及动态记忆体冷热轮转规约，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、Token 侧漏、上下文饱和、历史状态丢失以及盲目重试死循环等核心痛点。**
@@ -241,3 +241,4 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 ## 🛠️ 规范贡献与维护
 
 如果您希望参与 **Spec-Driven Solo** 规范的维护、新增技术轮廓（Tech Profile）或提交改进提案，请参阅我们的 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解维护者 SOP 与打包断言规范。
+
