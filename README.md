@@ -1,4 +1,4 @@
-> **当前规范版本**：`v2.4.2` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
+> **当前规范版本**：`v2.4.3` | 完整演进记录请参阅 [变更日志](#-变更日志-change-log)。
 # 📘 Spec-Driven Solo 开发工程规范
 
 > **专为 ChatGPT Plus (Web) + Codex 架构设计的矩阵化、多形态三轨工程标准。旨在通过 Codex 项目规则、精确读取预算以及动态记忆体冷热轮转规约，系统性解决自主 AI 编程智能体在长对话迭代中出现的幻觉、Token 侧漏、上下文饱和、历史状态丢失以及盲目重试死循环等核心痛点。**
@@ -159,6 +159,8 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 * `[3]` **跨平台桌面端应用** (Tauri 2.x + React + Rust)
 * `[4]` **复杂数据/BI 后台管理** (Next.js + Zustand + Shadcn/ui)
 
+初始化器会将包管理器执行命令与 `package.json` 内部脚本分离：例如用户执行 `pnpm build` 时，`build` 脚本实际运行所选 Profile 对应的 `vite build`、`next build`、`taro build` 或 `tauri build`，避免脚本自调用。生成的项目同时提供 `dev`、`start`、`lint` 与 `typecheck` 基础命令，并记录当前包管理器版本及最低 Node.js 版本。
+
 执行完毕后，使用集成开发环境（IDE）打开该目录，并将工作区访问权限授予 Codex。本脚手架在根目录生成 `AGENTS.md` 和 `.codexrules`：Codex 自动发现 `AGENTS.md`，再按入口说明加载完整项目规则。
 
 ---
@@ -173,6 +175,9 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 
 
 ## 📅 变更日志 (Change Log)
+### [v2.4.3] - 2026-08-02
+* 修复项目初始化脚本存在build → pnpm build → build 自调用的问题。
+
 ### [v2.4.0] - 2026-08-02
 * 初始化项目仅面向 Codex，生成 `AGENTS.md` 与 `.codexrules`，移除 Cline 规则及忽略文件。
 * `.codexrules` 成为唯一项目规则源，并补充授权、读取、审批、验证和 Memory Bank 回写边界。
@@ -242,4 +247,3 @@ curl -fsSL https://raw.githubusercontent.com/soyona/spec-driven-solo/main/releas
 ## 🛠️ 规范贡献与维护
 
 如果您希望参与 **Spec-Driven Solo** 规范的维护、新增技术轮廓（Tech Profile）或提交改进提案，请参阅我们的 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解维护者 SOP 与打包断言规范。
-

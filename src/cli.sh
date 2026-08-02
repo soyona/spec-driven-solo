@@ -34,6 +34,10 @@ elif command -v yarn &> /dev/null; then
     PKG_MANAGER="yarn"
     RUN_CMD="yarn"
 fi
+if ! PKG_MANAGER_VERSION=$($PKG_MANAGER --version 2>/dev/null) || [ -z "$PKG_MANAGER_VERSION" ]; then
+    echo "❌ 错误: 未找到可用的 npm、pnpm、bun 或 yarn 包管理器！"
+    exit 1
+fi
 
 echo "--------------------------------------------------------"
 echo "🎨 请选择您的产品形态与技术轮廓 (Tech Profile):"
@@ -48,7 +52,10 @@ read -p "请输入选项数字 (1-4, 默认 1): " PROFILE_CHOICE </dev/tty
 case $PROFILE_CHOICE in
     2)
         PROFILE_NAME="微信跨端小程序 (Taro 4.x)"
-        COMPILE_CMD="$RUN_CMD build:weapp"
+        DEV_SCRIPT="taro build --type weapp --watch"
+        BUILD_SCRIPT="taro build --type weapp"
+        START_SCRIPT="$DEV_SCRIPT"
+        COMPILE_CMD="$RUN_CMD build"
         STATE_STRATEGY="React Context 局部隔离"
         META_WHITELIST='[ "@tarojs/components", "@tarojs/taro", "lucide-react" ]'
         META_BLACKLIST='[ "vant-weapp", "miniprogram-custom-render" ]'
@@ -56,7 +63,10 @@ case $PROFILE_CHOICE in
         ;;
     3)
         PROFILE_NAME="跨平台桌面端应用 (Tauri 2.x)"
-        COMPILE_CMD="cargo check && $RUN_CMD build"
+        DEV_SCRIPT="tauri dev"
+        BUILD_SCRIPT="cargo check && tauri build"
+        START_SCRIPT="$DEV_SCRIPT"
+        COMPILE_CMD="$RUN_CMD build"
         STATE_STRATEGY="前端 Context / Tauri IPC 持久化"
         META_WHITELIST='[ "tauri-plugin-fs", "wasm-bindgen", "serde", "tokio" ]'
         META_BLACKLIST='[ "child_process", "fs.writeFileSync", "panic!" ]'
@@ -64,6 +74,9 @@ case $PROFILE_CHOICE in
         ;;
     4)
         PROFILE_NAME="复杂数据/BI 后台管理 (Next.js)"
+        DEV_SCRIPT="next dev"
+        BUILD_SCRIPT="next build"
+        START_SCRIPT="next start"
         COMPILE_CMD="$RUN_CMD build"
         STATE_STRATEGY="特许解禁 Zustand 局部切片订阅"
         META_WHITELIST='[ "zustand", "echarts", "shadcn-ui", "next" ]'
@@ -72,6 +85,9 @@ case $PROFILE_CHOICE in
         ;;
     *)
         PROFILE_NAME="Web/SaaS 轻量通用型 (Vite Standard)"
+        DEV_SCRIPT="vite"
+        BUILD_SCRIPT="vite build"
+        START_SCRIPT="vite preview"
         COMPILE_CMD="$RUN_CMD build"
         STATE_STRATEGY="React Context 纯函数状态机"
         META_WHITELIST='[ "vite", "tailwindcss", "react-router-dom" ]'
@@ -177,8 +193,16 @@ cat << EOF > package.json
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "$PKG_MANAGER@$PKG_MANAGER_VERSION",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
-    "build": "$COMPILE_CMD"
+    "dev": "$DEV_SCRIPT",
+    "build": "$BUILD_SCRIPT",
+    "start": "$START_SCRIPT",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   }
 }
 EOF
